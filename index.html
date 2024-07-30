@@ -270,6 +270,7 @@
       const costPrice = parseFloat(document.getElementById('costPrice2').value) || 0;
       const discountPercentage = parseFloat(document.getElementById('dPercentage').value) || 0;
       const discountPrice = costPrice * (discountPercentage / 100);
+      vat newprice = costPrice - discountPrice;
       document.getElementById('dPrice').value = discountPrice.toFixed(2);
     }
 
