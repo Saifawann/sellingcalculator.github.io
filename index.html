@@ -1,197 +1,328 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selling Calculator</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
+  <title> Selling Calculator</title>
   <style>
-    body {
-      font-family: 'Arial', sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .column4 {
+    float: left;
+    width: 25%;
+    padding: 0 5px;
+  }
+
+  .column3 {
+    float: left;
+    width: 33.33%;
+    padding: 0 5px;
+  }
+  .column2 {
+    float: left;
+    width: 50%;
+    padding: 0 5px;
+  }
+  .column1 {
+    float: left;
+    width: 100%;
+    padding: 0 5px;
+  }
+
+
+
+  .row {margin:  -5px -5px 15px;}
+
+  .row2 {margin:  0 -5px 15px;} 
+
+  .row3 {margin:  -5px -5px 15px;} 
+
+
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .row2:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .row3:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 5px 5px;
+    border: none;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #f1f1f1;
+}
+select{
+  width: 100%;
+  padding: 5px 5px;
+  border: none;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 2px solid #f1f1f1;
+  text-align: start;
+}
+p{
+  width: 100%;
+  border: none;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid #f1f1f1;
+  background-color: #f1f1f1;
+
+}
+h2{
+  width: 100%;
+  padding: 2px;
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid #f1f1f1;
+  background-color: #f1f1f1;
+}
+.card {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2); 
+  padding: 1px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  border: 0.5px solid #cecece;
+  display: block;
+}
+  .card2 {
+    width: 30%;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2); 
+    padding: 16px;
+    background-color: #f1f1f1;
+
+  }
+  .center {
+    margin: auto;
+    width: 35%;
+    border: 2px solid #000000;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  .center2 {
+    margin: auto;
+    border: 2px solid #000000;
+    padding: 10px;
+    width: 100%;
+  }
+
+  @media only screen and (max-width:1000px) {
+    /* For tablets: */
+    .card, .card2{
+      width: 100%;
+      display: block;
     }
-    .card-custom {
-      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-      padding: 1px;
-      margin-top: 10px;
-      text-align: center;
-      border-radius: 5px;
-      background-color: #f1f1f1;
-      border: 0.5px solid #cecece;
+  }
+  @media screen and (max-width: 400px) {
+    .card, .card2{
+      width: 100%;
+      display: block;
     }
-    .card-custom2 {
-      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-      padding: 16px;
-      background-color: #f1f1f1;
-    }
-    .center {
-      margin: auto;
-      padding: 10px;
-      border: 2px solid #000000;
-    }
+  }
   </style>
 </head>
 <body onload="calculations()">
-  
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="card card-custom">
-          <h2 class="card-header">Selling Calculator</h2>
-          <div class="card-body">
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>Margin</small>
-                  <input type="number" id="margin" class="form-control" step="any" readonly>
-                </div>
-                <div class="card card-custom">
-                  <small>Break Even</small>
-                  <input type="number" id="breakeven" class="form-control" step="any" readonly>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>Minimum</small>
-                  <input type="number" id="minimum" class="form-control" step="any" readonly>
-                </div>
-                <div class="card card-custom">
-                  <small>CM%</small>
-                  <input type="number" id="cm" class="form-control" step="any" readonly>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>Target</small>
-                  <input type="number" id="target" class="form-control" step="any" readonly>
-                </div>
-                <div class="card card-custom">
-                  <small>SM%</small>
-                  <input type="number" id="sm" class="form-control" step="any" readonly>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>Maximum</small>
-                  <input type="number" id="maximum" class="form-control" step="any" readonly>
-                </div>
-                <div class="card card-custom">
-                  <small>Analyzer</small>
-                  <input type="number" id="analyzer" class="form-control" step="any" readonly>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <div class="card card-custom">
-                  <small>Cost Price</small>
-                  <input type="number" id="costPrice" class="form-control" step="any" value="0" onkeyup="calculations()" onclick="this.select();">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="card card-custom">
-                  <small>Selling Price</small>
-                  <input type="number" id="sellingPrice" class="form-control" step="any" value="0" onkeyup="calculations()" onclick="this.select();">
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>VAT</small>
-                  <input type="number" id="vat" class="form-control" step="any" value="20" onkeyup="calculations()">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>PQA</small>
-                  <input type="number" id="pqa" class="form-control" step="any" value="1" onkeyup="calculations()">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>Del Cost</small>
-                  <input type="number" id="delCost" class="form-control" step="any" value="2.1" onkeyup="calculations()">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card card-custom">
-                  <small>Fee</small>
-                  <input type="number" id="fee" class="form-control" onkeyup="calculations()">
-                </div>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-12">
-                <div class="card card-custom">
-                  <small>Category For Fee</small>
-                  <select name="category" id="category" class="form-control" onchange="calculations()">
-                  </select>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card card-custom">
-                  <small>Min Quantity</small>
-                  <input type="number" id="minPQA" class="form-control" value="1" step="any" onkeyup="calculations()">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card card-custom">
-                  <small>Min Quantity Min.</small>
-                  <input type="number" id="minQuantityMin" class="form-control" step="any" onkeyup="calculations()">
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card card-custom">
-                  <small>Min Quantity Tar.</small>
-                  <input type="number" id="minQuantityTar" class="form-control" step="any" onkeyup="calculations()">
-                </div>
-              </div>
-            </div>
+
+<!-- outputs -->
+
+<div class="row center2">
+  <div class="column3">
+    <div class="card2 center2">
+      <h2>Selling Calculator</h2>
+      <div class="row2">
+        <div class="column4">
+          <div class="card">
+            <small for="margin">Margin</small>
+            <input type="number" id="margin" step="any"  readonly>
+          </div>
+          <div class="card">
+            <small for="breakeven">Break Even</small>
+            <input type="number" id="breakeven" step="any"  readonly>
+          </div>
+        </div>
+        <div class="column4">
+          <div class="card">
+            <small for="minimum">Minimum</small>
+            <input type="number" id="minimum" step="any"  readonly>
+          </div>
+          <div class="card">
+            <small for="cm">CM%</small>
+            <input type="number" id="cm" step="any"  readonly>
+          </div>
+
+        </div>
+        <div class="column4">
+          <div class="card">
+            <small for="target">Target</small>
+            <input type="number" id="target" step="any"  readonly>
+          </div>
+
+          <div class="card">
+            <small for="sm">SM%</small>
+            <input type="number" id="sm" step="any"  readonly>
+          </div>
+
+        </div>
+        <div class="column4">
+          <div class="card">
+            <small for="maximum">Maximum</small>
+            <input type="number" id="maximum" step="any"  readonly>
+          </div>
+          <div class="card">
+            <small for="analyzer">Analyzer</small>
+            <input type="number" id="analyzer" step="any"  readonly>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card card-custom2">
-          <h2 class="card-header">Percentage Calculator</h2>
-          <div class="card-body">
-            <div class="card card-custom">
-              <small>Discount Price</small>
-              <input type="number" id="dPrice" class="form-control" step="any" readonly>
+
+      <!-- Inputs -->
+
+      <hr style="height:2px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0)">
+
+    <div class="row">
+        <div class="column2">
+          <div class="card">
+            <small for="costprice">Cost Price</small>
+            <input type="number" id="costPrice" step="any" value="0" onKeyUp="calculations()" onclick="this.select();">
+          </div>
+        </div>
+        <div class="column2">
+          <div class="card">
+            <small for="sellingprice">Selling Price</small>
+            <input type="number" id="sellingPrice" step="any" value="0" onKeyUp="calculations()" onclick="this.select();">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column4">
+          <div class="card">
+            <small for="vat">VAT</small>
+            <input type="number" id="vat" step="any" value="20" onKeyUp="calculations()">
+          </div>
+        </div>
+        <div class="column4">
+          <div class="card">
+            <small for="pqa">PQA</small>
+            <input type="number" id="pqa" step="any" value="1" onKeyUp="calculations()">
+          </div>
+        </div>
+        <div class="column4">
+          <div class="card">
+            <small for="delCost">Del Cost</small>
+            <input type="number" id="delCost" step="any" value="2.1" onKeyUp="calculations()">
+          </div>
+        </div>
+          <div class="column4">
+            <div class="card">
+            <small for="fee">Fee</small>
+            <input type="number" id="fee" onKeyUp="calculations()">
             </div>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <div class="card card-custom">
-                  <small>Cost Price</small>
-                  <input type="number" id="costPrice2" class="form-control" step="any" value="0" onkeyup="discount_Calculation()" onclick="this.select();">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="card card-custom">
-                  <small>Discount Percentage</small>
-                  <input type="number" id="dPercentage" class="form-control" step="any" value="25" onkeyup="discount_Calculation()" onclick="this.select();">
-                </div>
-              </div>
-            </div>
+        </div>
+      </div>
+
+      <div class="row">
+      <div class="column1">
+        <div class="card">
+          <small for="fee">Category For Fee</small>
+          <select name="category" id="category" onchange="calculations()">
+          </select>
+        </div>
+      </div>
+
+      </div>
+
+    <!-- Min Quantity -->
+
+    <hr style="height:2px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0)">
+
+      <div class="row3">
+      <div class="column3">
+        <div class="card">
+          <small for="minPQA">Min Quantity</small>
+          <input type="number" id="minPQA" value = "1" step="any"  onKeyUp="calculations()">
+        </div>
+      </div>
+      <div class="column3">
+        <div class="card">
+          <small for="minQuantityMin">Min Quantity Min.</small>
+          <input type="number" id="minQuantityMin" step="any" onKeyUp="calculations()">
+        </div>
+      </div>
+      <div class="column3">
+        <div class="card">
+          <small for="minQuantityTar">Min Quantity Tar.</small>
+          <input type="number" id="minQuantityTar" step="any" onKeyUp="calculations()">
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="column3">
+    <div class="card2 center2">
+      <h2>Percentage Calculator</h2>
+      <div class="card">
+        <small for="Discount Price">Discount Price</small>
+        <input type="number" id="dPrice" step="any"  readonly>
+      </div>
+      <div class="row">
+        <div class="column2">
+          <div class="card">
+            <small for="costprice">Cost Price</small>
+            <input type="number" id="costPrice2" step="any" value="0" onKeyUp="discount_Calculation()" onclick="this.select();">
+          </div>
+        </div>
+        <div class="column2">
+          <div class="card">
+            <small for="Discount Percentage">Discount Percentage</small>
+            <input type="number" id="dPercentage" step="any" value="25" onKeyUp="discount_Calculation()" onclick="this.select();">
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
-  <script>
-    const category = [
-{value: '15.3', text: 'Everything else',selected: true, maxi: '20', value2: '20'},
+  <div class="column3">
+    <div class="card2 center2">
+      <h2>Simple Calculator</h2>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<script>
+  let optionList = document.getElementById('category').options;
+const category = [
+    {value: '15.3', text: 'Everything else',selected: true, maxi: '20', value2: '20'},
     {value: '12.24', text: 'Additive Manufacturing', maxi: '20', value2: '20'},
     {value: '45.90', text: 'Amazon Device Accessories', maxi: '20', value2: '20'},
     {value: '15.3', text: 'Beauty', maxi: '20', value2: '20'},
@@ -228,53 +359,74 @@
     {value: '8.16', text: 'Video Games - Consoles', maxi: '20', value2: '20'},
     {value: '15.3', text: 'Watches', maxi: '20', value2: '20'},
     {value: '12.24', text: 'Handmade', maxi: '20', value2: '20'}
-    ];
+]
 
-    function populateCategory() {
-      const categorySelect = document.getElementById('category');
-      category.forEach(cat => {
-        const option = document.createElement('option');
-        option.value = cat.value;
-        option.text = cat.text;
-        if (cat.selected) {
-          option.selected = true;
-        }
-        categorySelect.appendChild(option);
-      });
+category.forEach(option =>
+    optionList.add(
+      new Option(option.text, option.value, option.selected)
+    )
+  );
+
+function calculations(){
+    var T2;
+    if (document.getElementById("costPrice").value.length == 0){
+      T2 = 0;
+    }
+    else{
+      T2 = parseFloat(document.getElementById("costPrice").value);
+    }
+    var AA2;
+    if (document.getElementById("sellingPrice").value.length == 0){
+      AA2 = 0;
+    }
+    else{
+      AA2 = parseFloat(document.getElementById("sellingPrice").value);
     }
 
-    function calculations() {
-      const costPrice = parseFloat(document.getElementById('costPrice').value) || 0;
-      const sellingPrice = parseFloat(document.getElementById('sellingPrice').value) || 0;
-      const vat = parseFloat(document.getElementById('vat').value) || 20;
-      const pqa = parseFloat(document.getElementById('pqa').value) || 1;
-      const delCost = parseFloat(document.getElementById('delCost').value) || 2.1;
-      const feePercentage = parseFloat(document.getElementById('fee').value) || 0;
-      const categoryFee = parseFloat(document.getElementById('category').value) || 0;
-      
-      const fee = sellingPrice * (categoryFee / 100);
-      const vatAmount = (sellingPrice - costPrice - delCost - fee) * (vat / 100);
-      const totalCost = costPrice + delCost + vatAmount;
-      
-      document.getElementById('margin').value = ((sellingPrice - totalCost) / sellingPrice * 100).toFixed(2);
-      document.getElementById('breakeven').value = (totalCost / (1 - (categoryFee / 100))).toFixed(2);
-      document.getElementById('minimum').value = (totalCost / (1 - (categoryFee / 100))).toFixed(2);
-      document.getElementById('cm').value = (((sellingPrice - totalCost) / sellingPrice) * 100).toFixed(2);
-      document.getElementById('sm').value = ((sellingPrice - totalCost) / sellingPrice * 100).toFixed(2);
-      document.getElementById('target').value = (totalCost / (1 - (categoryFee / 100))).toFixed(2);
-      document.getElementById('analyzer').value = (totalCost / (1 - (categoryFee / 100))).toFixed(2);
-      document.getElementById('maximum').value = (totalCost / (1 - (categoryFee / 100))).toFixed(2);
-    }
+    console.log(parseFloat(document.getElementById("category").maxi))
 
-    function discount_Calculation() {
-      const costPrice = parseFloat(document.getElementById('costPrice2').value) || 0;
-      const discountPercentage = parseFloat(document.getElementById('dPercentage').value) || 0;
-      const discountPrice = costPrice * (discountPercentage / 100);
-      vat newprice = costPrice - discountPrice;
-      document.getElementById('dPrice').value = discountPrice.toFixed(2);
-    }
 
-    document.addEventListener('DOMContentLoaded', populateCategory);
-  </script>
+    var U2 = parseFloat(document.getElementById("vat").value);
+    var V2 = parseFloat(document.getElementById("pqa").value);
+    var Y2 = parseFloat(document.getElementById("category").value);
+    var W2 = parseFloat(document.getElementById("delCost").value);
+    var AJ2 = parseFloat(document.getElementById("minPQA").value);
+    var Z2 = 0
+    document.getElementById("fee").value = Y2;
+
+    var mar = (AA2/((100+U2)/100)-(AA2*(Y2+3.4*Z2)/100)-T2*V2-W2)-0.3*Z2
+    var analyzer = (AA2-mar)/AA2
+    var min = (T2*V2+W2+0.3+0.3*Z2)/((100/(U2+100))-((Y2+3.4*Z2)/100)-0.1)
+    var max = (T2*V2+W2+2+0.3*Z2)/((100/(U2+100))-((Y2+3.4*Z2)/100)-0.2)
+    var tar = (T2*V2+W2+0.5+0.3*Z2)/((100/(U2+100))-((Y2+3.4*Z2)/100)-0.15)
+    var be = (T2*V2+W2+0.3*Z2)/((100/(U2+100))-((Y2+3.4*Z2)/100))
+    var cm = mar/T2*100
+    var sm = mar/AA2*100
+    var minPqamin =(T2*V2*AJ2+W2+0.3+0.3*Z2)/((100/(U2+100))-((Y2+3.4*Z2)/100)-0.1)/AJ2
+    var minPqatar =(T2*V2*AJ2+W2+0.5+0.3*Z2)/((100/(U2+100))-((Y2+3.4*Z2)/100)-0.15)/AJ2
+    document.getElementById("margin").value = mar.toFixed(3);
+    document.getElementById("minimum").value = min.toFixed(3);
+    document.getElementById("maximum").value = max.toFixed(3);
+    document.getElementById("target").value = tar.toFixed(3);
+    document.getElementById("breakeven").value = be.toFixed(3);
+    document.getElementById("cm").value = cm.toFixed(3);
+    document.getElementById("sm").value = sm.toFixed(3);
+    document.getElementById("analyzer").value = analyzer.toFixed(3);
+    document.getElementById("minQuantityMin").value = minPqamin.toFixed(3);
+    document.getElementById("minQuantityTar").value = minPqatar.toFixed(3);
+
+
+}
+function discount_Calculation(){
+  var costPrice2 = parseFloat(document.getElementById("costPrice2").value);
+  var dPErcentage = parseFloat(document.getElementById("dPercentage").value);
+
+  var dPrice = ((100-dPErcentage)/100)*costPrice2;
+  document.getElementById("dPrice").value = dPrice;
+
+
+
+}
+</script>
 </body>
 </html>
